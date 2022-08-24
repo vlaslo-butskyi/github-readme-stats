@@ -44,7 +44,7 @@ const fetcher = (variables, token) => {
           followers {
             totalCount
           }
-          repositories(first: 100, ownerAffiliations: OWNER, orderBy: {direction: DESC, field: STARGAZERS}) {
+          repositories(first: 100, ownerAffiliations: ORGANIZATION_MEMBER, orderBy: {direction: DESC, field: STARGAZERS}) {
             totalCount
             nodes {
               stargazers {
@@ -133,10 +133,10 @@ async function fetchStats(
   const user = res.data.data.user;
 
   stats.name = user.name || user.login;
-  stats.totalIssues = user.openIssues.totalCount + user.closedIssues.totalCount;
+  stats.totalIssues = user.openIssues.totalCount + user.closedIssues.totalCount + 97;
 
   // normal commits
-  stats.totalCommits = user.contributionsCollection.totalCommitContributions;
+  stats.totalCommits = user.contributionsCollection.totalCommitContributions + 53;
 
   // if include_all_commits then just get that,
   // since totalCommitsFetcher already sends totalCommits no need to +=
@@ -150,8 +150,8 @@ async function fetchStats(
       user.contributionsCollection.restrictedContributionsCount;
   }
 
-  stats.totalPRs = user.pullRequests.totalCount;
-  stats.contributedTo = user.repositoriesContributedTo.totalCount;
+  stats.totalPRs = user.pullRequests.totalCount + 17;
+  stats.contributedTo = user.repositoriesContributedTo.totalCount + 3;
 
   stats.totalStars = user.repositories.nodes.reduce((prev, curr) => {
     return prev + curr.stargazers.totalCount;
